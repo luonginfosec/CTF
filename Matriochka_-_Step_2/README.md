@@ -5,7 +5,7 @@
 - Đầu tiên ta có thể dễ dàng tính được len của chuỗi nhờ vào câu lệnh điều kiện ban đầu 42 * (strlen(a2[1]) + 1) == 504 như vậy dễ dàng tính được len của chuỗi đúng sẽ là 11.
 - Tiếp theo là 1 loạt câu lệnh so sánh và nếu v5 != 0 thì chương trình sẽ nhảy vào được hàm sub_40064D(a2[1]);
 ![alt text](image-2.png)
-- Như vậy chỉ cần v5 != 0 thì chương trình sẽ đi đúng luồng chúng ta muốn, quay lại hàm man ban đầu
+- Như vậy chỉ cần v5 != 0 thì chương trình sẽ đi đúng luồng chúng ta muốn, quay lại hàm main ban đầu
 ![alt text](image-1.png)
 - Chúng ta có thể dễ dàng giải tay ngược lại những điều kiện kia để tìm lại được chuỗi đúng hoàn chỉnh,do có đúng 11 phương trình hoặc giá trị.
 - Chúng ta có thể giải tay hoặc sử dụng module z3 đây là code mẫu của tôi trong 2 trường hợp
