@@ -10,7 +10,7 @@
 ![alt text](image-1.png)
 - Nhận ra a1 là mảng flag của chúng ta , code tạo hàng loạt code so sánh và trả về true nếu đúng . Thứ chúng ta cần là tìm lại giá trị của mảng a1 , mảng a1 là mảng ord()
 ## Tản mạn
-- Python là một ngôn ngữ mạnh nó hỗ trợ các thư viện tốt . Tôi từng biết đến 1 thư viện Z3 ở giải PTIT CTF vòng sơ khảo . Nhưng tôi không biết nó có thể giải được những thứ phức tạp như thế này.
+- Python là một ngôn ngữ mạnh nó hỗ trợ các thư viện tốt . Tôi từng biết đến 1 thư viện Z3. Nhưng tôi không biết nó có thể giải được những thứ phức tạp như thế này.
 
 ## Đến code giải
 ```Python
