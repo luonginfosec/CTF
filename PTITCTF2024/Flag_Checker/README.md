@@ -14,7 +14,7 @@
 
 ## Đến code giải
 - Vì phần code khá dài nên tôi sẽ link code ở đây
-[Ấn vào để xem code](solve.py)
+[ấn vào để xem code](solve.py)
 - Đây là phần đau đầu nhất, tôi đã mất hàng giờ để làm, phần phức tạp ở bài này chính là việc bóc tách dữ liệu, bạn thực sự cần kiên trì.
 - Sau hàng giờ cố gắng tôi đã tìm thấy flag
 ```PTITCTF{Y0u_C4n_Br34k_Equ4tion_Ag41n_6861696e64!!!}```
