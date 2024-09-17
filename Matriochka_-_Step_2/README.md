@@ -50,4 +50,4 @@ else:
     print("No solution found")
 ```
 ## Kết
-Sau khi chạy code ta nhận được mã đúng gồm 11 kí tự ```Pandi_panda ```
+Sau khi chạy code ta nhận được mã đúng gồm 11 kí tự ```Pandi_panda```
