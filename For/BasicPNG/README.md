@@ -3,10 +3,11 @@
 # Solution
 
 - Sau khi mở ảnh bằng HXD,tôi không thấy có gì khả quan.
-
-- Sau khi đọc và nhận được sự gợi ý từ các bạn, tôi đã thử cộng trừ các byte và brute, nhưng không có gì khả thi, tôi tiến hành xor byte với 0x1b và nhận được kết quả khả quan hơn
 ![alt text](image_.png)
+- Sau khi đọc và nhận được sự gợi ý từ các bạn, tôi đã thử cộng trừ các byte và brute, nhưng không có gì khả thi, tôi tiến hành xor byte với 0x1b và nhận được kết quả khả quan hơn
+![alt text](image.png)
 - MZ dấu hiệu khá quen thuộc của 1 file thực thi tôi tiến hành viết code lấy các byte xor 0x1b và lưu lại file
+- 
 ```Python
 def xor_bytes(byte_array, key=0x1B):
     return bytes([byte ^ key for byte in byte_array])
