@@ -59,5 +59,5 @@ Vậy vậy vậy ```(unsigned int)(v5[0] % 10), (unsigned int)(v5[0] / 10), (un
 - Tôi tiến hành debug và nhập v4 bừa , v5[0] = 18.
 - Tôi nhận được file PTITCTF{P1g_E4t_Sl33p} là file gif
 ## Kết
-- Tôi đã nhận được flag trong file gif
+- Tôi đã nhận được flag trong file gif.
 ![alt text](imageFlag.png)
