@@ -3,7 +3,7 @@
 ![alt text](image-1.png)
 - Thử mở có thể các bạn thiếu thư viện code C++, tìm hiểu và cài sẽ chạy được. Chương trình in ra 2 dòng chữ như hình.
 - Chúng ta có hint
-![alt text](hint.txt)
+```Xóa mờ đi dòng kí ức , loại bỏ đi hết những thứ phức tạp , Luffy nhớ lại mình rất ghét đi Ad và Mid vì anh là 1 người tự làm tự ăn.```
 - Nếu bạn chơi liên quân nhiều có thể đoán đây là vị trí đường top.
 ![alt text](image-2.png)
 - Sử dụng công cụ như hình, chúng ta thấy đây là file 64-bit , LE , C++.
