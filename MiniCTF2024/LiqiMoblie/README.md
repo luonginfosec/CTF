@@ -45,7 +45,7 @@ print(result)
 ![alt text](image-5.png)
 - Chúng ta thu được mã code tiến hành beautiful code lại
 ![alt text](image-6.png)
-Đây là 1 mảng bằng mã hex tôi tiến hành decode xem nó là gì.
+- Đây là 1 mảng bằng mã hex tôi tiến hành decode xem nó là gì.
 ```Python
 rpb= [0]*50
 rpb[4] = 0x43
