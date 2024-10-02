@@ -1,1 +1,2 @@
-Tất cả những  thứ gì mà tôi làm về CTF.
+- Tất cả những  thứ gì mà tôi làm về CTF.
+- Trong quá trình có gì sai sót hoặc thắc mắc vui lòng liên hệ https://www.facebook.com/Luong.Vd.D24/?locale=vi_VN
