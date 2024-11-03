@@ -1,4 +1,4 @@
-# Read binary data from jpg2bin.txt
+
 with open('', 'r') as file:
     binary_string = file.read().strip()
 
