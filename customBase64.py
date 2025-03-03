@@ -11,11 +11,12 @@ def custom_b64decode(encoded_data, custom_alphabet):
     return base64.b64decode(standard_data)
 
 # Convert custom_alphabet to a list to make it mutable
-custom_alphabet = list("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")
-for i in range(10):
-    v1 = custom_alphabet[i]
-    custom_alphabet[i] = custom_alphabet[19 - i]
-    custom_alphabet[19 - i] = v1
+custom_alphabet = list("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0987654321/+")
+print(len(custom_alphabet))
+# for i in range(10):
+#     v1 = custom_alphabet[i]
+#     custom_alphabet[i] = custom_alphabet[19 - i]
+#     custom_alphabet[19 - i] = v1
 # Convert custom_alphabet back to a string
 custom_alphabet = ''.join(custom_alphabet)
 data = b"luongvd"
@@ -23,5 +24,5 @@ data = b"luongvd"
 encoded = custom_b64encode(data, custom_alphabet)
 print("Encoded:", encoded)
 # Decode
-decoded = custom_b64decode("d2G0ZjLwHjS7DmOzZAY0X2lzX3CoZV9zdNOydO9vZl9yZXZlcnGlfD==", custom_alphabet)
+decoded = custom_b64decode("mTyqm7wjODkrNLcWl0eqO8K8gc1BPk1GNLgUpI==", custom_alphabet)
 print("Decoded:", decoded.decode('utf-8'))
