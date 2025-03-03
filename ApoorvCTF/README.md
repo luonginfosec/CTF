@@ -2,9 +2,9 @@
 
 ## Thông tin
 - **CTF**: ApoorvCTF
-- **Challenge Name**: Evil Rice
-- **Category**: REV
-- **Challenge Link**: [Evil Rice](./evil-rice-cooker)
+- **Tên**: Evil Rice
+- **Mảng**: REV
+- **Challenge**: [Evil Rice](./evil-rice-cooker)
 
 ## Phân tích
 
@@ -14,7 +14,6 @@
   - dest được copy với encrypt_shellcode ,**n = 169**, sau đó chạy vào hàm decode_shellcode với key_xor ở đây là **key_xor db 170** (xor từng kí tự ( 0 < i < n))
 ![alt text](image_2.png)
 - Rồi sau đó input của chúng ta được truyền vào trong dest, để kiểm tra chính xác hàm dest là gì là xong ?
-- 
 
 ## Khai thác
 
