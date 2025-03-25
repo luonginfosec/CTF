@@ -321,3 +321,124 @@ Thu được flag
 <summary>Flag</summary>
 flag{e165421110ba03099a1c039337}
 </details> 
+
+## B24. [WUSTCTF2020]level2
+
+Unpack = UPX và nhận được flag.s
+
+<details>
+<summary>Flag</summary>
+flag{Just_upx_-d}
+</details> 
+
+
+## B25. CrackRTF
+
+![alt text](_BAI25.png)
+
+Oke oke, Nhìn sơ sơ thì chúng ta phải đi qua 2 phần nhập pass. Chúng ta sẽ tiến hành từng phần 1.
+
+
+#### Phần 1
+
+
+Chúng ta thấy đoạn này chương trình yêu cầu nhập vào 1 số có 6 chữ số, rồi sau đó nối chuỗi với @DBApp sau đó truyền qua hàm decrypt rồi so sánh với chuỗi 6E32D0943418C2C33385BC35A1470250DD8923A9 
+
+![alt text](BAI25_1.png)
+
+
+Chú ý đến CryptCreateHash là một hàm trong Windows API thuộc thư viện Cryptographic API (CryptoAPI), được sử dụng để tạo một đối tượng băm (hash object) nhằm thực hiện các thao tác băm dữ liệu bằng một thuật toán băm cụ thể.
+
+![alt text](BAI25_2.png)
+
+
+```
+BOOL CryptCreateHash(
+  HCRYPTPROV   hProv,
+  ALG_ID       Algid,
+  HCRYPTKEY    hKey,
+  DWORD        dwFlags,
+  HCRYPTHASH   *phHash
+);
+```
+Chú ý An ALG_ID value that identifies the hash algorithm to use.
+Valid values for this parameter vary, depending on the CSP that is used. For a list of default algorithms, see Remarks.
+
+```CryptCreateHash(phProv, 0x8004u, 0, 0, &phHash)```
+
+Nhờ tham số được truyền vào hàm này mà chúng ta có thể xác định thuật toán mã hóa 
+
+![alt text](BAI25_3.png)
+
+Oke clear vậy, đây là hàm mã hóa bằng SHA-1.
+
+Vậy chúng ta đã biết bây giờ pass sẽ là 
+
+
+6 số + @DBApp sau đó hash bằng SHA-1 rồi so sánh 6E32D0943418C2C33385BC35A1470250DD8923A9. Tôi sẽ tiến hành viết script để brute pass này.
+
+![alt text](BAI25_4.png)
+
+Oke vậy pass đầu tiên là 123321@DBApp input chúng ta cần nhập là 123321.
+
+![alt text](BAI25_5.png)
+
+
+#### Phần 2
+
+Tương tự đến phần nhập pass thứ hai xem thử thuật toán mã hóa bên trong là gì 
+
+![alt text](BAI25_6.png)
+
+![alt text](BAI25_7.png)
+
+Nhập 6 kí tự sau rồi lại cat với pass đầu tiên, quá khó để brute khả năng phải nghĩ hướng khác r.
+
+#### Phần 3
+
+Xem trong hàm sub_40100F
+
+![alt text](BAI25_8.png)
+
+![alt text](BAI25_10.png)
+
+Oke như vậy là nó sẽ đọc file trong resource AAA kia rồi giải mã tạo thành file rtf. 
+
+```
+LPCVOID lpBuffer; // Con trỏ trỏ đến dữ liệu tài nguyên sau khi được khóa.
+DWORD NumberOfBytesWritten; // Biến lưu số byte đã ghi vào tệp.
+DWORD nNumberOfBytesToWrite; // Biến lưu kích thước của tài nguyên.
+HGLOBAL hResData; // Biến lưu handle của tài nguyên đã tải.
+HRSRC hResInfo; // Biến lưu handle của thông tin tài nguyên.
+HANDLE hFile; // Handle của tệp sẽ được ghi.
+```
+
+Sử dụng resource hacker để export.
+
+
+![alt text](BAI25_9.png)
+
+
+Mớ này sẽ được xor với key hoàn chỉnh tức là 6 kí tự + 123321@DBApp để tạo thành file rtf. Giờ chúng ta sẽ thử đi tìm header của file này là xong thôi :> .
+
+![alt text](BAI25_11.png)
+
+Ngon luôn, như vậy chúng ta chỉ cần xor 6 bytes đầu tiên với {\rtf1 là sẽ ra đoạn pass còn lại.
+
+
+```Python
+def xor_bytes(input_str, key_bytes):
+    input_bytes = input_str.encode()  
+    result = [input_bytes[i] ^ key_bytes[i] for i in range(len(input_bytes))]
+    return bytes(result).decode(errors='ignore') 
+input_str = "{\\rtf1"
+key_bytes = [0x05, 0x7D, 0x41, 0x15, 0x26, 0x01]
+
+output = xor_bytes(input_str, key_bytes)
+print(output)  
+~!3a@0
+```
+
+Vậy Input 1 sẽ là 123321, input 2 ~!3a@0
+Chạy và chúng ta thu được file flag.
+![alt text](BAI25_12.png)
