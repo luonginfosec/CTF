@@ -442,3 +442,417 @@ print(output)
 Vậy Input 1 sẽ là 123321, input 2 ~!3a@0
 Chạy và chúng ta thu được file flag.
 ![alt text](BAI25_12.png)
+
+
+## B26.[MRCTF2020]Transform
+
+
+![alt text](BAI26.png)
+
+Logic khá đơn giản chúng ta tiến hành viết code python solve luôn.
+
+```Python
+byte_40F0E0 = [
+  0x67, 0x79, 0x7B, 0x7F, 0x75, 0x2B, 0x3C, 0x52, 0x53, 0x79, 
+  0x57, 0x5E, 0x5D, 0x42, 0x7B, 0x2D, 0x2A, 0x66, 0x42, 0x7E, 
+  0x4C, 0x57, 0x79, 0x41, 0x6B, 0x7E, 0x65, 0x3C, 0x5C, 0x45, 
+  0x6F, 0x62, 0x4D
+]
+byte_414040 = byte_40F0E0
+dword_40F040 = [
+  0x09 , 0x0A , 0x0F, 
+   0x17 , 0x07 , 
+  0x18 , 0x0C , 0x06, 
+   0x01 , 0x10 , 
+  0x03 , 0x11 , 0x20, 
+   0x1D , 0x0B , 
+  0x1E , 0x1B , 0x16, 
+   0x04 , 0x0D , 
+  0x13 , 0x14 , 0x15, 
+   0x02 , 0x19 , 
+  0x05 , 0x1F , 0x08, 
+   0x12 , 0x1A , 
+  0x1C , 0x0E, 0x00
+]
+input = [0] * 34
+for i in range(len(byte_40F0E0)):
+    byte_40F0E0[i] ^= dword_40F040[i] % 0xFF
+    input[int(dword_40F040[i])] = byte_40F0E0[i]
+print("".join(chr(x) for x in input))
+```
+<details>
+<summary>Flag</summary>
+MRCTF{Tr4nsp0sltiON_Clph3r_1s_3z}
+flag{Tr4nsp0sltiON_Clph3r_1s_3z}
+</details> 
+
+
+## B27. [2019红帽杯]easyRE
+
+![alt text](BAI27.png)
+
+Bản chất v12,v13,v14 chỉ là một mảng, v15 của chúng ta là 36 kí tự sau đó nó lấy từng kí tự một xor với index của chính nó.
+
+Chúng ta thử giải mã thử xem có gì khả quan không.
+```Python
+v12 = "Iodl>Qnb(ocy\x7Fy.i\x7Fd`3w}wek9{iy=~yL@EC"
+v12 = list(v12)
+for i in range(len(v12)):
+    print(chr(ord(v12[i]) ^ i),end="")
+#Info:The first four chars are `flag`
+```
+
+Có 1 đoạn base64 nhưng chỉ là lừa, khả năng có thể có hàm ẩn nào bên trong gọi ẩn dữ liệu mà không được gọi.
+
+![alt text](BAI27_1.png)
+
+Sau một hồi đọc wu, :( mò mẫn các thứ thì cuối cùng chúng ta tìm thấy hàm này.
+Thấy nó xor với các mảng 4 kí tự kia, mà chúng ta lại biết 4 kí tự đầu tiên là flag có thể dễ dàng tìm lại key xor. 
+
+Export data ra rồi xor thử.
+
+```Python
+v12 = "Iodl>Qnb(ocy\x7Fy.i\x7Fd`3w}wek9{iy=~yL@EC"
+v12 = list(v12)
+for i in range(len(v12)):
+    print(chr(ord(v12[i]) ^ i),end="")
+print(end="\n")
+byte_6CC0A0_byte_6CC0A3 = [
+  0x40, 0x35, 0x20, 0x56, 0x5D, 0x18, 0x22, 0x45, 0x17, 0x2F, 
+  0x24, 0x6E, 0x62, 0x3C, 0x27, 0x54, 0x48, 0x6C, 0x24, 0x6E, 
+  0x72, 0x3C, 0x32, 0x45, 0x5B
+]
+key = [0] * 4
+know = "flag"
+know = list(know)
+for i in range(0,4):
+    key[i] = ord(know[i]) ^ byte_6CC0A0_byte_6CC0A3[i]
+for i in range(0,len(byte_6CC0A0_byte_6CC0A3)):
+    print(chr(byte_6CC0A0_byte_6CC0A3[i] ^ key[i % 4]),end="")
+```
+
+<details>
+<summary>Flag</summary>
+flag{Act1ve_Defen5e_Test}
+</details> 
+
+## B28. [MRCTF2020]Xor
+
+Quá dễ chỉ là xor, sau khi giải quá nhiều bài thì bài này thật đơn giản.
+
+```Python
+flag_enc = [
+  0x4D, 0x53, 0x41, 0x57, 0x42, 0x7E, 0x46, 0x58, 0x5A, 0x3A, 
+  0x4A, 0x3A, 0x60, 0x74, 0x51, 0x4A, 0x22, 0x4E, 0x40, 0x20, 
+  0x62, 0x70, 0x64, 0x64, 0x7D, 0x38, 0x67, 0x00
+]   
+for i in range(len(flag_enc)):
+    print(chr(flag_enc[i] ^ i),end="")
+```
+
+<details>
+<summary>Flag</summary>
+MRCTF{@_R3@1ly_E2_R3verse!}
+flag{@_R3@1ly_E2_R3verse!}
+</details> 
+
+## B29. [ACTF新生赛2020]usualCrypt
+
+![alt text](BAI29_1.png)
+
+Thả vào IDA chúng sau 1 lúc đổi tên biến chúng ta đã có cái nhìn cơ bản về chương trình này.
+
+Đơn giản là input của chúng ta được decryt và sau đó check từng kí tự một có giống aZmxhz3tignxlxj.
+
+![alt text](BAI29_2.png)
+
+Chúng ta thấy các hàm đi qua là sub_401000, 1 đoạn trông giống mã hóa base64, và cuối cùng,sub_401030.
+
+![alt text](BAI29_3.png)
+
+Hàm sub_401030 trả về kết quả lúc compare ở hàm main, cái này thực hiện việc đổi chữ cái từ a-z nếu đang là chữ hoa thì thành chữ thường và ngược lại. 
+
+
+Vậy lúc này chuỗi enc của chúng ta là aZmxhz3tignxlxj = "zMXHz3TIgnxLxJhFAdtZn2fFk3lYCrtPC2l9" thật chất đúng phải là "ZmxhZ3tiGNXlXjHfaDTzN2FfK3LycRTpc2L9" đoạn này thử decode base64 thử thì chỉ ra được flag{
+
+Khả năng đã có sử biến đổi cái base64 table kia đây là kiểu base64 custom.
+
+
+![alt text](BAI29_4.png)
+
+Đúng vậy, tôi xem đoạn này không hiểu lắm thôi debug lấy xem giá trị cho lành.
+
+Thu được giá trị table
+```
+byte_40E0A0 db 'A'                      ; DATA XREF: sub_401000:loc_401005↑r
+.data:0040E0A0                                         ; sub_401000+17↑w ...
+.data:0040E0A1 db  42h ; B
+.data:0040E0A2 db  43h ; C
+.data:0040E0A3 db  44h ; D
+.data:0040E0A4 db  45h ; E
+.data:0040E0A5 db  46h ; F
+.data:0040E0A6 db  51h ; Q
+.data:0040E0A7 db  52h ; R
+.data:0040E0A8 db  53h ; S
+.data:0040E0A9 db  54h ; T
+.data:0040E0AA ; char byte_40E0AA[]
+.data:0040E0AA byte_40E0AA db 'U'                      ; DATA XREF: sub_401000+B↑r
+.data:0040E0AA                                         ; sub_401000+11↑w
+.data:0040E0AB aLmnopqrstuvwxy db 'VWXYPGHIJKLMNOZabcdefghijklmnopqrstuvwxyz0123456789+/',0
+
+ABCDEFQRSTUVWXYPGHIJKLMNOZabcdefghijklmnopqrstuvwxyz0123456789+/
+```
+
+![alt text](BAI29_5.png)
+
+Viết code lấy flag
+
+```Python
+import base64
+
+# Bảng mã base64 tùy chỉnh của bạn
+custom_b64 = "ABCDEFQRSTUVWXYPGHIJKLMNOZabcdefghijklmnopqrstuvwxyz0123456789+/"
+standard_b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+
+# Bản đồ hoán đổi ký tự từ bảng mã tùy chỉnh về bảng chuẩn
+trans_table = str.maketrans(custom_b64, standard_b64)
+
+# Chuỗi base64 mã hóa
+encoded_str = "ZmxhZ3tiGNXlXjHfaDTzN2FfK3LycRTpc2L9"
+
+# Chuyển đổi sang base64 chuẩn
+standard_encoded = encoded_str.translate(trans_table)
+
+# Giải mã base64
+decoded_bytes = base64.b64decode(standard_encoded)
+decoded_str = decoded_bytes.decode(errors="ignore")
+
+```
+
+<details>
+<summary>Flag</summary>
+flag{bAse64_h2s_a_Surprise}
+</details> 
+
+## B30.[MRCTF2020]hello_world_go
+Xem trong string có flag hoặc xem đoạn compare.
+
+<details>
+<summary>Flag</summary>
+flag{hello_world_gogogo}
+</details> 
+
+## B31. [HDCTF2019]Maze
+
+![alt text](BAI31_1.png)
+
+Đoạn này chúng ta thấy không F5 được nhưng chúng ta thấy có 1 câu lệnh không hợp lệ 
+đó là:
+- jnz short near ptr loc_40102E+1 không hợp lệ vì:
+
+- short và near ptr không thể dùng chung.
+
+- loc_40102E+1 không phải cách viết đúng địa chỉ.
+
+Thử nop lệnh này xong đó patched lại.
+![alt text](BAI31_2.png)
+
+Ngon chúng ta đã view được mã giả.
+
+![alt text](BAI31_3.png)
+
+
+Đây là 1 bài ma trận điển hình chúng ta chỉ cần thử sắp xếp lại ma trận, cũng có thể đoán là sau 14 bước thì giải mã được mê cung sau 1 hồi sắp xếp tôi được 1 ma trận như sau
+
+
+```
+*******+**
+******* **
+****    **
+**   *****
+** **F****
+**    ****
+**********
+```
+
+
+```
+*******+**
+*******0**
+****0000**
+**000*****
+**0**F****
+**0000****
+**********
+```
+
+Đường đi đúng sẽ là ssaaasaassdddww
+
+
+Oke nhập chương trình và thu được flag
+
+
+<details>
+<summary>Flag</summary>
+
+- Go through the maze to get the flag!
+- ssaaasaassdddww
+- Congratulations!
+- Here is the flag:flag{ssaaasaassdddw}
+
+</details> 
+
+## B32. [SUCTF2019]SignIn
+
+
+## **📜 Phân tích từng dòng của `main`**
+### **1️⃣ Khai báo biến cục bộ**
+```c
+  _BYTE v4[16];  // Số N (modulus trong RSA)
+  _BYTE v5[16];  // Số e (exponent trong RSA)
+  _BYTE v6[16];  // Giá trị flag đã mã hóa
+  _BYTE v7[16];  // Giá trị hash mục tiêu
+  _BYTE v8[112]; // Buffer lưu flag nhập vào
+  _BYTE v9[1000];// Buffer lưu flag sau khi chuyển thành hex
+  unsigned __int64 v10;
+```
+- `v4`: Biến chứa **số nguyên RSA modulus \( N \)**  
+- `v5`: Biến chứa **exponent \( e = 65537 \)**  
+- `v6`: Biến chứa **input đã mã hóa** (sẽ so sánh với giá trị chuẩn `v7`)  
+- `v7`: **Giá trị hash mục tiêu** (đã mã hóa từ flag đúng)  
+- `v8`: **Buffer nhập input** từ người dùng  
+- `v9`: **Chuyển đổi input thành dạng hex** (bằng `sub_96A`)  
+
+---
+
+### **2️⃣ Lấy canary stack (chống lỗi tràn bộ đệm)**
+```c
+v10 = __readfsqword(0x28u);
+```
+- **Lấy giá trị canary của stack** (bảo vệ khỏi tấn công stack smashing).  
+- **Không quan trọng trong bài toán RSA**, nhưng cần biết để tránh khai thác lỗi buffer overflow.  
+
+---
+
+### **3️⃣ Hiển thị và nhận flag từ người dùng**
+```c
+puts("[sign in]");
+printf("[input your flag]: ");
+__isoc99_scanf("%99s", v8);
+```
+- In thông báo `[sign in]`
+- Yêu cầu nhập flag (`scanf("%99s", v8)` giới hạn tối đa 99 ký tự)
+
+---
+
+### **4️⃣ Chuyển đổi flag nhập vào thành hex**
+```c
+sub_96A(v8, v9);
+```
+Hàm `sub_96A` chuyển đổi từng ký tự của `v8` thành **chuỗi hex**.  
+Ví dụ: nếu nhập `flag`, nó sẽ chuyển thành `666c6167`.  
+Dữ liệu hex này sẽ được **mã hóa RSA** sau đó.
+
+---
+
+### **5️⃣ Gán các giá trị RSA**
+```c
+__gmpz_init_set_str(v7, "ad939ff59f6e70bcbfad406f2494993757eee98b91bc244184a377520d06fc35", 16LL);
+__gmpz_init_set_str(v6, v9, 16LL);
+__gmpz_init_set_str(v4, "103461035900816914121390101299049044413950405173712170434161686539878160984549", 10LL);
+__gmpz_init_set_str(v5, "65537", 10LL);
+```
+- `v7`: **Chuỗi hash mục tiêu**, flag đúng sau khi mã hóa.  
+- `v6`: **Dữ liệu nhập từ người dùng (dạng hex)**  
+- `v4`: **Modulus \( N \) của RSA**  
+- `v5`: **Số mũ công khai \( e = 65537 \)**  
+
+---
+
+### **6️⃣ Mã hóa input nhập vào bằng RSA**
+```c
+__gmpz_powm(v6, v6, v5, v4);
+```
+- **RSA Encryption:**  
+  \[
+  v6 = v6^{65537} \mod v4
+  \]
+- Dữ liệu nhập (`v6`) được nâng lũy thừa lên `e = 65537` rồi lấy `mod N`.
+
+---
+
+### **7️⃣ So sánh kết quả với giá trị chuẩn**
+```c
+if ( (unsigned int)__gmpz_cmp(v6, v7) )
+    puts("GG!");  // Sai
+else
+    puts("TTTTTTTTTTql!");  // Đúng
+```
+- Nếu giá trị **mã hóa từ input** (`v6`) **khớp với hash mục tiêu** (`v7`) → **in ra `"TTTTTTTTTTql!"` (FLAG ĐÚNG!)**  
+- Nếu không → `"GG!"` (FLAG SAI).  
+
+---
+
+## **🔑 Cách tìm flag**
+### 🚀 **Mục tiêu**
+**Tìm flag sao cho khi mã hóa bằng RSA, nó khớp với `v7`**  
+\[
+m^{65537} \mod N = 0xad939ff59f6e70bcbfad406f2494993757eee98b91bc244184a377520d06fc35
+\]
+
+---
+
+### 🛠 **Giải mã RSA**
+Vì ta biết:
+- **Ciphertext**: `ad939ff59f6e70bcbfad406f2494993757eee98b91bc244184a377520d06fc35`
+- **Modulus \( N \)**: `103461035900816914121390101299049044413950405173712170434161686539878160984549`
+- **Exponent \( e = 65537 \)**
+
+➡ Cần **tìm plaintext \( m \)** bằng cách **giải mã RSA**:
+\[
+m = c^d \mod N
+\]
+Với:
+\[
+d = e^{-1} \mod \varphi(N)
+\]
+Mà:
+\[
+\varphi(N) = (p-1)(q-1)
+\]
+Với:
+\[
+p = 282164587459512124844245113950593348271
+\]
+\[
+q = 366669102002966856876605669837014229419
+\]
+
+### **💻 Code Python để giải mã**
+```python
+from Crypto.Util.number import inverse, long_to_bytes
+
+# Cho trước
+p = 282164587459512124844245113950593348271
+q = 366669102002966856876605669837014229419
+N = p * q
+e = 65537
+c = int("ad939ff59f6e70bcbfad406f2494993757eee98b91bc244184a377520d06fc35", 16)
+
+# Tính φ(N)
+phi = (p - 1) * (q - 1)
+
+# Tính d (private key)
+d = inverse(e, phi)
+
+# Giải mã flag
+m = pow(c, d, N)
+flag = long_to_bytes(m)
+
+print(flag.decode())
+```
+
+<details>
+<summary>Flag</summary>
+suctf{Pwn_@_hundred_years}
+</details> 
