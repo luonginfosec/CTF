@@ -51,8 +51,7 @@ Thông thường, hàm này chỉ kiểm tra **cờ `BeingDebugged`** trong **Pr
 
 ---
 
-Bạn muốn mình dịch luôn đoạn mã mẫu đó sang tiếng Việt kèm giải thích từng dòng không?
-Như vậy bạn sẽ dễ hiểu hơn cách hàm `IsDebuggerPresent` được dùng để chống debug.
+
 
 ![alt text](./image4.png)
 
