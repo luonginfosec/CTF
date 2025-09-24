@@ -1,0 +1,164 @@
+{
+  "rows": 5,
+  "cols": 6,
+  "tile_w": 82,
+  "tile_h": 98,
+  "orig_w": 490,
+  "orig_h": 490,
+  "padded_w": 492,
+  "padded_h": 490,
+  "pad_right": 2,
+  "pad_bottom": 0,
+  "pieces": [
+    {
+      "file": "piece_00.png",
+      "r": 0,
+      "c": 0
+    },
+    {
+      "file": "piece_01.png",
+      "r": 0,
+      "c": 1
+    },
+    {
+      "file": "piece_02.png",
+      "r": 0,
+      "c": 2
+    },
+    {
+      "file": "piece_03.png",
+      "r": 0,
+      "c": 3
+    },
+    {
+      "file": "piece_04.png",
+      "r": 0,
+      "c": 4
+    },
+    {
+      "file": "piece_05.png",
+      "r": 0,
+      "c": 5
+    },
+    {
+      "file": "piece_06.png",
+      "r": 1,
+      "c": 0
+    },
+    {
+      "file": "piece_07.png",
+      "r": 1,
+      "c": 1
+    },
+    {
+      "file": "piece_08.png",
+      "r": 1,
+      "c": 2
+    },
+    {
+      "file": "piece_09.png",
+      "r": 1,
+      "c": 3
+    },
+    {
+      "file": "piece_10.png",
+      "r": 1,
+      "c": 4
+    },
+    {
+      "file": "piece_11.png",
+      "r": 1,
+      "c": 5
+    },
+    {
+      "file": "piece_12.png",
+      "r": 2,
+      "c": 0
+    },
+    {
+      "file": "piece_13.png",
+      "r": 2,
+      "c": 1
+    },
+    {
+      "file": "piece_14.png",
+      "r": 2,
+      "c": 2
+    },
+    {
+      "file": "piece_15.png",
+      "r": 2,
+      "c": 3
+    },
+    {
+      "file": "piece_16.png",
+      "r": 2,
+      "c": 4
+    },
+    {
+      "file": "piece_17.png",
+      "r": 2,
+      "c": 5
+    },
+    {
+      "file": "piece_18.png",
+      "r": 3,
+      "c": 0
+    },
+    {
+      "file": "piece_19.png",
+      "r": 3,
+      "c": 1
+    },
+    {
+      "file": "piece_20.png",
+      "r": 3,
+      "c": 2
+    },
+    {
+      "file": "piece_21.png",
+      "r": 3,
+      "c": 3
+    },
+    {
+      "file": "piece_22.png",
+      "r": 3,
+      "c": 4
+    },
+    {
+      "file": "piece_23.png",
+      "r": 3,
+      "c": 5
+    },
+    {
+      "file": "piece_24.png",
+      "r": 4,
+      "c": 0
+    },
+    {
+      "file": "piece_25.png",
+      "r": 4,
+      "c": 1
+    },
+    {
+      "file": "piece_26.png",
+      "r": 4,
+      "c": 2
+    },
+    {
+      "file": "piece_27.png",
+      "r": 4,
+      "c": 3
+    },
+    {
+      "file": "piece_28.png",
+      "r": 4,
+      "c": 4
+    },
+    {
+      "file": "piece_29.png",
+      "r": 4,
+      "c": 5
+    }
+  ]
+}
